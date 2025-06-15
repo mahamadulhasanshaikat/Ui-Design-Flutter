@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/build_adventure_box.dart';
+import 'package:flutter_application_1/widgets/build_tab.dart';
+import 'package:flutter_application_1/widgets/task_Item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,23 +9,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffD3D3D3),
+      backgroundColor: Color(0xffD3D3D3),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Greeting Section
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(5.0),
                 child: Row(
                   children: [
                     const CircleAvatar(
                       backgroundImage: AssetImage("assets/img.jpg"),
                       radius: 25,
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -45,6 +48,7 @@ class HomeScreen extends StatelessWidget {
 
               // Feel Today Card
               Card(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -65,10 +69,10 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 10),
                       LayoutBuilder(
                         builder: (context, constraints) {
-                          double boxWidth = (constraints.maxWidth - 4 * 12) / 5;
+                          double boxWidth = (constraints.maxWidth - 1 * 25) / 5;
 
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,10 +81,11 @@ class HomeScreen extends StatelessWidget {
                                 height: boxWidth,
                                 width: boxWidth,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: Color(0xffD3D3D3),
+                                  borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
+                                      // ignore: deprecated_member_use
                                       color: Colors.black.withOpacity(0.08),
                                       blurRadius: 10,
                                       offset: const Offset(0, 6),
@@ -179,6 +184,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: Colors.black.withOpacity(0.1),
                           blurRadius: 10,
                           offset: Offset(0, 6),
@@ -194,17 +200,15 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              _buildTab("Morning", true),
-                              _buildTab("Afternoon", false),
-                              _buildTab("Evening", false),
+                              buildTab("Morning", true),
+                              buildTab("Afternoon", false),
+                              buildTab("Evening", false),
                             ],
                           ),
-                          const SizedBox(height: 16),
-                          _taskItem("Water the plants."),
-                          _taskItem(
-                            "Pay electricity bill. and bring the card.",
-                          ),
-                          _taskItem("Go to shopping. Buy a shirt."),
+                          SizedBox(height: 16),
+                          taskItem("Water the plants."),
+                          taskItem("Pay electricity bill. and bring the card."),
+                          taskItem("Go to shopping. Buy a shirt."),
                         ],
                       ),
                     ),
@@ -261,7 +265,7 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       children: List.generate(
                         4,
-                        (index) => _buildAdventureBox(),
+                        (index) => buildAdventureBox(),
                       ),
                     ),
                   ),
@@ -270,78 +274,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildAdventureBox() {
-    return Container(
-      width: 140,
-      margin: const EdgeInsets.only(right: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.explore, size: 40, color: Colors.teal),
-          SizedBox(height: 12),
-          Text(
-            "Start your adventure today",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Tab builder
-  Widget _buildTab(String text, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.teal.withOpacity(0.2) : Colors.grey[200],
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: isSelected ? Colors.teal : Colors.black54,
-          fontWeight: FontWeight.w500,
-          fontSize: 13,
-        ),
-      ),
-    );
-  }
-
-  // Task item builder
-  Widget _taskItem(String task) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.check_box_outline_blank,
-            color: Colors.teal,
-            size: 20,
-          ),
-          const SizedBox(width: 8),
-          Expanded(child: Text(task, style: const TextStyle(fontSize: 14))),
-        ],
       ),
     );
   }
