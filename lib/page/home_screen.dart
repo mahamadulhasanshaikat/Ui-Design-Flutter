@@ -123,8 +123,9 @@ class HomeScreen extends StatelessWidget {
 
               // Motivation Card
               Card(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 elevation: 8,
                 shadowColor: Colors.black26,
@@ -148,12 +149,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      const Icon(
-                        Icons.volume_up,
-                        color: Colors.deepPurple,
-                        size: 28,
-                      ),
+                      SizedBox(width: 12),
+                      Icon(Icons.volume_up, color: Colors.deepPurple, size: 28),
                     ],
                   ),
                 ),
@@ -203,6 +200,17 @@ class HomeScreen extends StatelessWidget {
                               buildTab("Morning", true),
                               buildTab("Afternoon", false),
                               buildTab("Evening", false),
+                            ],
+                          ),
+                          SizedBox(height: 16),
+                          Column(
+                            children: [
+                              Divider(
+                                color: Colors.blue,
+                                thickness: 2.0,
+                                indent: 5.0,
+                                endIndent: 5.0,
+                              ),
                             ],
                           ),
                           SizedBox(height: 16),
